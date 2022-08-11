@@ -16,8 +16,7 @@ const (
 
 func (t *templater) fieldNameKyeHandler(file *excelize.File, sheet string, rowIdx, colIdx *int, value interface{}) error {
 	axis, _ := excelize.CoordinatesToCellName(*colIdx+1, *rowIdx+1)
-	file.SetCellValue(sheet, axis, value)
-	return nil
+	return file.SetCellValue(sheet, axis, value)
 }
 
 func (t *templater) tableKeyHandler(file *excelize.File, sheet string, rowIdx, colIdx *int, value interface{}) error {
@@ -26,7 +25,9 @@ func (t *templater) tableKeyHandler(file *excelize.File, sheet string, rowIdx, c
 		return fmt.Errorf("tableKeyHandler: wrong type payload, array type expected")
 	}
 
-	file.RemoveRow(sheet, *rowIdx+1)
+	if err := file.RemoveRow(sheet, *rowIdx+1); err != nil {
+		return fmt.Errorf("remove row number %d: %w", *rowIdx+1, err)
+	}
 
 	hRowNumb := *rowIdx + 1
 	rows, _ := file.GetRows(sheet)
@@ -34,7 +35,9 @@ func (t *templater) tableKeyHandler(file *excelize.File, sheet string, rowIdx, c
 
 	for i, item := range array {
 		if i < len(array)-1 {
-			file.DuplicateRowTo(sheet, hRowNumb, hRowNumb+1+i)
+			if err := file.DuplicateRowTo(sheet, hRowNumb, hRowNumb+1+i); err != nil {
+				return fmt.Errorf("dublicate row number %d: %w", hRowNumb, err)
+			}
 		}
 		for j := *colIdx; j < len(hRow); j++ {
 			placeholderType, v, err := t.placeholder.GetValue(item, hRow[j])

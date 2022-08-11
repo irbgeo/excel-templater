@@ -103,7 +103,6 @@ func (t *templater) fillInSheet(file *excelize.File, sheet string, payload inter
 					return
 				}
 			}
-
 		}
 	}
 	return

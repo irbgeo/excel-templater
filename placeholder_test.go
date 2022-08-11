@@ -80,18 +80,6 @@ var (
 			placeholderType: qrCodeType,
 		},
 	}
-
-	testRequired = testCase{
-		placeholder:     "{required}",
-		value:           "required_value",
-		placeholderType: fieldNameType,
-	}
-
-	testNoRequired = testCase{
-		placeholder:     "{no_required_value}",
-		value:           "",
-		placeholderType: fieldNameType,
-	}
 )
 
 func TestGetValue(t *testing.T) {

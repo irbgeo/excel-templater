@@ -9,8 +9,8 @@ import (
 )
 
 var (
-	templateFile = "example/template.xlsx"
-	resultFile   = "example/result.xlsx"
+	templateFile = "./examples/template.xlsx"
+	resultFile   = "./examples/result.xlsx"
 	useDefault   = false
 
 	//go:embed payload.json
