@@ -4,8 +4,9 @@ import (
 	_ "embed"
 	"encoding/json"
 
-	"github.com/geoirb/excel-templater"
 	"github.com/xuri/excelize/v2"
+
+	"github.com/geoirb/excel-templater"
 )
 
 var (

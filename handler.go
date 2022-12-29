@@ -124,31 +124,6 @@ func (s *templater) imageHandler(file *excelize.File, sheet string, rowIdx, colI
 	return nil
 }
 
-// For quick work add to github.com/xuri/excelize/v2 function:
-// GetNumMergeCell provides a function to get the number of merged rows and columns by axis cell
-// from a worksheet currently.
-// func (f *File) GetNumMergeCell(sheet string, axis string) (colNum int, rowNum int, err error) {
-// 	ws, err := f.workSheetReader(sheet)
-// 	if err != nil {
-// 		return
-// 	}
-
-// 	if ws.MergeCells != nil {
-// 		for i := range ws.MergeCells.Cells {
-// 			ref := ws.MergeCells.Cells[i].Ref
-// 			cells := strings.Split(ref, ":")
-// 			if cells[0] == axis {
-// 				col1, row1, _ := CellNameToCoordinates(cells[0])
-// 				col2, row2, _ := CellNameToCoordinates(cells[1])
-// 				colNum, rowNum = col2-col1+1, row2-row1+1
-// 				return
-// 			}
-// 		}
-// 	}
-// 	colNum = 1
-// 	rowNum = 1
-// 	return
-// }
 func getNumMergeCell(file *excelize.File, sheet string, axis string) (colNum int, rowNum int, err error) {
 	mergedCells, err := file.GetMergeCells(sheet)
 	if err != nil {

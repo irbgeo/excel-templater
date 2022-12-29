@@ -74,7 +74,7 @@ func (t *templater) FillIn(templatePath string, payload interface{}) (r io.Reade
 	return
 }
 
-//  filling in on sheet.
+// filling in on sheet.
 func (t *templater) fillInSheet(file *excelize.File, sheet string, payload interface{}) (err error) {
 	rows, err := file.GetRows(sheet)
 	if err != nil {
